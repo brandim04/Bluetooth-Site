@@ -16,10 +16,9 @@ Site educativo sobre tecnologia Bluetooth desenvolvido para a disciplina de Rede
 - CSS3
 - JavaScript
 
-## 🌐 Como Executar
+## 🌐 Como Acessar
 
-1. Clone o repositório
-2. Abra o arquivo `index.html` no navegador
+https://brandim04.github.io/Bluetooth-Site
 
 ## 📚 Conteúdo
 

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluetooth - Tecnologia de Comunicação Sem Fio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: #2c3e50;
+            color: white;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #3498db;
+        }
+
+        /* Mobile menu */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0 40px;
+            min-height: 100vh;
+        }
+
+        .section-content {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* Introduction section */
+        .intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .bluetooth-image {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: #3498db;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            background: #ecf0f1;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            color: #3498db;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Tech specs */
+        .tech-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .spec-card {
+            background: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .spec-title {
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-subtitle {
+            color: #3498db;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Applications */
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .app-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ecf0f1;
+        }
+
+        .app-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        /* References - Formatação ABNT */
+        .references {
+            background: #ecf0f1;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .references h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .references ol {
+            padding-left: 0;
+            list-style: none;
+            counter-reset: item;
+        }
+
+        .references li {
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+            text-align: left;
+            padding-left: 0;
+            counter-increment: item;
+            font-size: 0.95rem;
+        }
+
+        .references li::before {
+            content: counter(item) ". ";
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .references a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .references a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo específico para títulos em itálico nas referências */
+        .references em {
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #2c3e50;
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                padding: 0.5rem 0;
+                text-align: center;
+            }
+
+            .intro-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.7rem;
+            }
+
+            .section-content {
+                padding: 1.5rem;
+            }
+
+            .bluetooth-image {
+                max-width: 250px;
+                height: 200px;
+                font-size: 3rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Active nav link */
+        .nav-menu a.active {
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Bluetooth</div>
+            <button class="hamburger">☰</button>
+            <ul class="nav-menu">
+                <li><a href="#introducao">Introdução</a></li>
+                <li><a href="#historia">História</a></li>
+                <li><a href="#tecnologia">Tecnologia</a></li>
+                <li><a href="#aplicacoes">Aplicações</a></li>
+                <li><a href="#referencias">Referências</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="introducao">
+        <div class="container">
+            <div class="section-content">
+                <h1>Bluetooth</h1>
+                <div class="intro-content">
+                    <div>
+                        <p style="font-size: 1.1rem;">
+                            O Bluetooth é uma tecnologia de comunicação sem fio de curto alcance que permite a troca de dados entre dispositivos eletrônicos. Desenvolvida na década de 1990, revolucionou a forma como os dispositivos se conectam e compartilham informações.
+                        </p>
+                        <p>
+                            Esta tecnologia opera na banda ISM de 2,4 GHz e utiliza salto de frequência para evitar interferências, permitindo conexões estáveis e seguras entre múltiplos dispositivos simultaneamente.
+                        </p>
+                    </div>
+                    <div class="bluetooth-image">
+                        📡
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </section>
+
+    <section id="historia">
+        <div class="container">
+            <div class="section-content">
+                <h2>História e Evolução</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">
+                    A evolução do Bluetooth desde sua concepção até os dias atuais, marcada por constantes inovações e melhorias.
+                </p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1994</div>
+                        <h3>Início do Desenvolvimento</h3>
+                        <p>A Ericsson inicia o desenvolvimento da tecnologia, buscando uma alternativa aos cabos seriais para conectar dispositivos móveis.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">1998</div>
+                        <h3>Formação do SIG</h3>
+                        <p>Criação do Bluetooth Special Interest Group (SIG) por Ericsson, IBM, Intel, Nokia e Toshiba para padronizar a tecnologia.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">1999</div>
+                        <h3>Bluetooth 1.0</h3>
+                        <p>Lançamento da primeira especificação oficial com taxa de transferência de 1 Mbps e diversos problemas de compatibilidade.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">2004</div>
+                        <h3>Bluetooth 2.0</h3>
+                        <p>Introdução do Enhanced Data Rate (EDR), aumentando a velocidade para 3 Mbps e melhorando a eficiência energética.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">2009</div>
+                        <h3>Bluetooth 3.0</h3>
+                        <p>Adição do High Speed (HS) usando Wi-Fi 802.11 para transferências de alta velocidade, alcançando até 24 Mbps.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">2010</div>
+                        <h3>Bluetooth 4.0</h3>
+                        <p>Introdução do Bluetooth Low Energy (BLE), revolucionando aplicações IoT com consumo ultra baixo de energia.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">2019</div>
+                        <h3>Bluetooth 5.0+</h3>
+                        <p>Melhorias significativas em alcance (4x), velocidade (2x) e capacidade de dados (8x), além de melhor coexistência com Wi-Fi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tecnologia">
+        <div class="container">
+            <div class="section-content">
+                <h2>Características Técnicas</h2>
+                <p style="margin-bottom: 2rem;">
+                    O Bluetooth utiliza tecnologias avançadas para garantir comunicação confiável e eficiente entre dispositivos.
+                </p>
+                
+                <div class="tech-specs">
+                    <div class="spec-card">
+                        <div class="spec-title">Salto de Frequência</div>
+                        <div class="spec-subtitle">FHSS (Frequency Hopping Spread Spectrum)</div>
+                        <p>Utiliza 79 canais diferentes na banda de 2,4 GHz, saltando 1600 vezes por segundo para evitar interferências e aumentar a segurança.</p>
+                    </div>
+                    
+                    <div class="spec-card">
+                        <div class="spec-title">Topologia de Rede</div>
+                        <div class="spec-subtitle">Piconet e Scatternet</div>
+                        <p>Cada piconet suporta até 8 dispositivos (1 mestre + 7 escravos). Múltiplas piconets podem formar uma scatternet para maior conectividade.</p>
+                    </div>
+                    
+                    <div class="spec-card">
+                        <div class="spec-title">Segurança</div>
+                        <div class="spec-subtitle">Autenticação e Criptografia</div>
+                        <p>Implementa autenticação de 128 bits, autorização baseada em PIN e criptografia E0 para proteger os dados transmitidos.</p>
+                    </div>
+                    
+                    <div class="spec-card">
+                        <div class="spec-title">Gerenciamento de Energia</div>
+                        <div class="spec-subtitle">Modos de Economia</div>
+                        <p>Inclui modos Hold, Sniff e Park para reduzir o consumo de energia, especialmente importante em dispositivos móveis.</p>
+                    </div>
+                    
+                    <div class="spec-card">
+                        <div class="spec-title">Classes de Potência</div>
+                        <div class="spec-subtitle">Alcance Variável</div>
+                        <p>Classe 1: 100m (100mW), Classe 2: 10m (2.5mW), Classe 3: 1m (1mW) - permitindo otimização para diferentes aplicações.</p>
+                    </div>
+                    
+                    <div class="spec-card">
+                        <div class="spec-title">Perfis de Aplicação</div>
+                        <div class="spec-subtitle">Protocolos Especializados</div>
+                        <p>A2DP (áudio), HID (dispositivos de entrada), OPP (transferência de objetos), e muitos outros para aplicações específicas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="aplicacoes">
+        <div class="container">
+            <div class="section-content">
+                <h2>Aplicações e Usos</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">
+                    O Bluetooth está presente em inúmeras aplicações do nosso dia a dia, desde entretenimento até aplicações industriais e médicas.
+                </p>
+                
+                <div class="applications-grid">
+                    <div class="app-card">
+                        <h3>Áudio e Entretenimento</h3>
+                        <p>Fones de ouvido, caixas de som, microfones e sistemas de som automotivos utilizam Bluetooth para transmissão de áudio de alta qualidade.</p>
+                    </div>
+                    
+                    <div class="app-card">
+                        <h3>Periféricos de Computador</h3>
+                        <p>Teclados, mouses, impressoras e outros dispositivos de entrada se conectam sem fio aos computadores e dispositivos móveis.</p>
+                    </div>
+                    
+                    <div class="app-card">
+                        <h3>Dispositivos Móveis</h3>
+                        <p>Transferência de arquivos, conexão com acessórios, sincronização de dados e pareamento com smartwatches e fitness trackers.</p>
+                    </div>
+                    
+                    <div class="app-card">
+                        <h3>Automotivo</h3>
+                        <p>Sistemas hands-free, streaming de música, diagnósticos de veículos e integração com smartphones para navegação e comunicação.</p>
+                    </div>
+                    
+                    <div class="app-card">
+                        <h3>Saúde e Medicina</h3>
+                        <p>Monitores de glicose, marca-passos, aparelhos auditivos e dispositivos de monitoramento contínuo de sinais vitais.</p>
+                    </div>
+                    
+                    <div class="app-card">
+                        <h3>Internet das Coisas (IoT)</h3>
+                        <p>Sensores inteligentes, automação residencial, beacons de localização e dispositivos de monitoramento ambiental.</p>
+                    </div>
+                    
+                    <div class="app-card">
+                        <h3>Jogos e Gaming</h3>
+                        <p>Controles sem fio, headsets para gaming, dispositivos de realidade virtual e acessórios para consoles de videogame.</p>
+                    </div>
+                    
+                    <div class="app-card">
+                        <h3>Aplicações Industriais</h3>
+                        <p>Monitoramento de equipamentos, sensores de processo, etiquetas inteligentes e sistemas de rastreamento de ativos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="referencias">
+        <div class="container">
+            <div class="section-content">
+                <h2>Referências</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">
+                    Fontes bibliográficas e documentação técnica utilizadas na elaboração deste conteúdo sobre Bluetooth.
+                </p>
+                
+                <div class="references">
+                    <ol>
+                        <li>BISDIKIAN, C. An Overview of the Bluetooth Wireless Technology. <em>IEEE Communications Magazine</em>, v. 39, n. 12, p. 86-94, 2001.</li>
+                        <li>BLUETOOTH SIG. <em>Bluetooth Core Specification Version 5.1</em>. 2019. Disponível em: <a href="https://www.bluetooth.com" target="_blank">https://www.bluetooth.com</a>. Acesso em: 03 jun. 2025.</li>
+                        <li>FERRO, E.; POTORTI, F. Bluetooth and Wi-Fi wireless protocols: a survey and a comparison. <em>IEEE Wireless Communications</em>, v. 12, n. 1, p. 12-26, 2005.</li>
+                        <li>GRATTON, D. A. <em>Bluetooth Profiles: The Definitive Guide</em>. Prentice Hall PTR, 2001.</li>
+                        <li>HAARTSEN, J. C. The Bluetooth radio system. <em>IEEE Personal Communications</em>, v. 7, n. 1, p. 28-36, 2000.</li>
+                        <li>HUANG, A. S.; RUDOLPH, L. <em>Bluetooth essentials for programmers</em>. Cambridge University Press, 2004.</li>
+                        <li>IEEE STANDARDS ASSOCIATION. <em>IEEE 802.15.1-2005 - Wireless Personal Area Networks</em>. 2016.</li>
+                        <li>KUMAR, S.; KAMBOJ, P. Evolution of Bluetooth Technology and its Applications. <em>International Journal of Computer Applications</em>, v. 179, n. 46, p. 6-11, 2018.</li>
+                        <li>MCDERMOTT-WELLS, P. What is Bluetooth? <em>IEEE Potentials</em>, v. 23, n. 5, p. 33-35, 2004.</li>
+                        <li>MULLER, N. J. <em>Bluetooth Demystified</em>. McGraw-Hill Professional, 2001.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="grupo" style="padding: 40px 0;">
+        <div class="container">
+            <div class="section-content">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Componentes do Grupo</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                    <div style="background: linear-gradient(135deg, #3498db, #2c3e50); color: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">👩‍💻</div>
+                        <h3 style="color: white; margin-bottom: 0.5rem; font-size: 1.5rem;">Larissa Brandim</h3>
+                        <p style="margin: 0; opacity: 0.9; font-size: 1.1rem;">Desenvolvedor</p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">👨‍💻</div>
+                        <h3 style="color: white; margin-bottom: 0.5rem; font-size: 1.5rem;">Vithor Gabriel</h3>
+                        <p style="margin: 0; opacity: 0.9; font-size: 1.1rem;">Desenvolvedor</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #ecf0f1;">
+                    <p style="color: #7f8c8d; font-size: 0.9rem; margin: 0;">
+                        © 2025 - Projeto Acadêmico sobre Tecnologia Bluetooth
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = target.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add active class to navigation links based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const headerHeight = document.querySelector('header').offsetHeight;
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - headerHeight - 100;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
